@@ -4,21 +4,14 @@ namespace CAM_NOG_BUM
 {
     class Program
     {
+        /*
+      сделать нечю
+      */
         const byte rock = 0;
-        const byte gun = 1;
-        const byte lighting = 2;
-        const byte devil = 3;
-        const byte dragon = 4;
-        const byte water = 5;
-        const byte air = 6;
-        const byte paper = 7;
-        const byte sponge = 8;
-        const byte wolf = 9;
-        const byte tree = 10;
-        const byte human = 11;
-        const byte snake = 12;
-        const byte scissors = 13;
-        const byte fire = 14;
+        const byte scissors = 1;
+        const byte paper = 2;
+        const byte spock = 3;
+        const byte lizard = 4;
         static void Main(string[] args)
         {
             /*\
@@ -33,7 +26,7 @@ namespace CAM_NOG_BUM
             #region peremennie
             Random R = new Random();
             byte bot_cul;
-            string[] variant = { "rock", "gun", "lighting", "devil", "dragon", "water", "air", "paper", "sponge", "wolf", "tree", "human", "lighting", "snake", "scissors", "fire" };
+            string[] variant = { "rock", "scissors", "paper", "spock", "lizard" };
             byte PLAYER_CUL;
             byte round = 0;
             byte win_bot = 0;
@@ -44,12 +37,12 @@ namespace CAM_NOG_BUM
             while (true)
             {
                 #region zapis xoda
-                bot_cul = (byte)R.Next(0, 15);
+                bot_cul = (byte)R.Next(0, 5);
                 //0 kum 1 nog 2 bum 3 spock 4 lizard
                 while (true)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("Вибери свой обєкт: r(rock), g(gun), l(lighting), de(devil), dr(dragon), wa(water), a(air), p(paper), sp(sponge), wo(wolf), t(tree), h(human), sn(snake), sc(scissors),f(fire) : ");
+                    Console.Write("Вибери свой обєкт: r(rock), sc(scissors), p(paper), sp(spock), l(lizard): ");
                     //камнем забити
                     //ножницами зарізати
                     //задушити бумагою
@@ -61,34 +54,9 @@ namespace CAM_NOG_BUM
                         PLAYER_CUL = rock;
                         break;
                     }
-                    else if (hod == "g")
+                    else if (hod == "sc")
                     {
-                        PLAYER_CUL = gun;
-                        break;
-                    }
-                    else if (hod == "l")
-                    {
-                        PLAYER_CUL = lighting;
-                        break;
-                    }
-                    else if (hod == "de")
-                    {
-                        PLAYER_CUL = devil;
-                        break;
-                    }
-                    else if (hod == "dr")
-                    {
-                        PLAYER_CUL = dragon;
-                        break;
-                    }
-                    else if (hod == "wa")
-                    {
-                        PLAYER_CUL = water;
-                        break;
-                    }
-                    else if (hod == "a")
-                    {
-                        PLAYER_CUL = air;
+                        PLAYER_CUL = scissors;
                         break;
                     }
                     else if (hod == "p")
@@ -98,37 +66,12 @@ namespace CAM_NOG_BUM
                     }
                     else if (hod == "sp")
                     {
-                        PLAYER_CUL = sponge;
+                        PLAYER_CUL = spock;
                         break;
                     }
-                    else if (hod == "wo")
+                    else if (hod == "l")
                     {
-                        PLAYER_CUL = wolf;
-                        break;
-                    }
-                    else if (hod == "t")
-                    {
-                        PLAYER_CUL = tree;
-                        break;
-                    }
-                    else if (hod == "h")
-                    {
-                        PLAYER_CUL = human;
-                        break;
-                    }
-                    else if (hod == "sn")
-                    {
-                        PLAYER_CUL = snake;
-                        break;
-                    }
-                    else if (hod == "sc")
-                    {
-                        PLAYER_CUL = scissors;
-                        break;
-                    }
-                    else if (hod == "f")
-                    {
-                        PLAYER_CUL = fire;
+                        PLAYER_CUL = lizard;
                         break;
                     }
                     else
@@ -144,19 +87,27 @@ namespace CAM_NOG_BUM
                     //drow
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     round++;
-                    Console.WriteLine($"Раунд {round} был закончн ничьёй, бота и игрока совпали выборы");
+                    Console.WriteLine($"Раунд{round} был закончн ничьёй, бота и игрока совпали выборы");
 
                 }
-                else if (PLAYER_CUL>=bot_cul-7|| PLAYER_CUL >= bot_cul -7+15)
+                else if ((bot_cul == rock && (PLAYER_CUL == scissors || PLAYER_CUL == lizard))
+                    || (bot_cul == paper && (PLAYER_CUL == rock || PLAYER_CUL == spock))
+                    || (bot_cul == scissors && (PLAYER_CUL == paper || PLAYER_CUL == lizard))
+                    || (bot_cul == lizard && (PLAYER_CUL == spock || PLAYER_CUL == paper))
+                    || (bot_cul == spock && (PLAYER_CUL == rock || PLAYER_CUL == scissors)))
                 {
                     //bot win round
                     round++;
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Раунд {round} был закончн победой бота, бот ходил {variant[bot_cul]}, а игрок {variant[PLAYER_CUL]}");
+                    Console.WriteLine($"Раунд{round} был закончн победой бота, бот ходил {variant[bot_cul]}, а игрок {variant[PLAYER_CUL]}");
 
                     win_bot++;
                 }
-                else if (bot_cul >= PLAYER_CUL - 7 || bot_cul >= PLAYER_CUL - 7 + 15)
+                else if ((PLAYER_CUL == rock && (bot_cul == scissors || bot_cul == lizard))
+                    || (PLAYER_CUL == paper && (bot_cul == rock || bot_cul == spock))
+                    || (PLAYER_CUL == scissors && (bot_cul == paper || bot_cul == lizard))
+                    || (PLAYER_CUL == lizard && (bot_cul == spock || bot_cul == paper))
+                    || (PLAYER_CUL == spock && (bot_cul == rock || bot_cul == scissors)))
                 {
                     //player win round
                     round++;
