@@ -3,22 +3,9 @@
 namespace CAM_NOG_BUM
 {
     class Program
-    {
-        const byte rock = 0;
-        const byte gun = 1;
-        const byte lighting = 2;
-        const byte devil = 3;
-        const byte dragon = 4;
-        const byte water = 5;
-        const byte air = 6;
-        const byte paper = 7;
-        const byte sponge = 8;
-        const byte wolf = 9;
-        const byte tree = 10;
-        const byte human = 11;
-        const byte snake = 12;
-        const byte scissors = 13;
-        const byte fire = 14;
+    {/*
+      сделать нечю
+      */
         static void Main(string[] args)
         {
             /*\
@@ -30,105 +17,39 @@ namespace CAM_NOG_BUM
             /*
              длаем переменнине
              */
-            #region peremennie
             Random R = new Random();
             byte bot_cul;
-            string[] variant = { "rock", "gun", "lighting", "devil", "dragon", "water", "air", "paper", "sponge", "wolf", "tree", "human", "lighting", "snake", "scissors", "fire" };
             byte PLAYER_CUL;
-            byte round = 0;
+            byte raund = 0;
             byte win_bot = 0;
             byte win_Player = 0;
             string hod;
-            #endregion
-
             while (true)
             {
-                #region zapis xoda
-                bot_cul = (byte)R.Next(0, 15);
-                //0 kum 1 nog 2 bum 3 spock 4 lizard
+                bot_cul = (byte)R.Next(0, 3);
+                //0 kum 1 nog 2 bum
                 while (true)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("Вибери свой обєкт: r(rock), g(gun), l(lighting), de(devil), dr(dragon), wa(water), a(air), p(paper), sp(sponge), wo(wolf), t(tree), h(human), sn(snake), sc(scissors),f(fire) : ");
+                    Console.WriteLine("Вибери свой обєкт(для убийства): k(kumen), n(nogniz), b(bumaga)");
                     //камнем забити
                     //ножницами зарізати
                     //задушити бумагою
                     hod = Console.ReadLine();
-                    Console.WriteLine();
                     //конвертуемо в число
-                    if (hod == "r")
+                    if (hod == "k")
                     {
-                        PLAYER_CUL = rock;
+                        PLAYER_CUL = 0;
                         break;
                     }
-                    else if (hod == "g")
+                    else if (hod == "n")
                     {
-                        PLAYER_CUL = gun;
+                        PLAYER_CUL = 1;
                         break;
                     }
-                    else if (hod == "l")
+                    else if (hod == "b")
                     {
-                        PLAYER_CUL = lighting;
-                        break;
-                    }
-                    else if (hod == "de")
-                    {
-                        PLAYER_CUL = devil;
-                        break;
-                    }
-                    else if (hod == "dr")
-                    {
-                        PLAYER_CUL = dragon;
-                        break;
-                    }
-                    else if (hod == "wa")
-                    {
-                        PLAYER_CUL = water;
-                        break;
-                    }
-                    else if (hod == "a")
-                    {
-                        PLAYER_CUL = air;
-                        break;
-                    }
-                    else if (hod == "p")
-                    {
-                        PLAYER_CUL = paper;
-                        break;
-                    }
-                    else if (hod == "sp")
-                    {
-                        PLAYER_CUL = sponge;
-                        break;
-                    }
-                    else if (hod == "wo")
-                    {
-                        PLAYER_CUL = wolf;
-                        break;
-                    }
-                    else if (hod == "t")
-                    {
-                        PLAYER_CUL = tree;
-                        break;
-                    }
-                    else if (hod == "h")
-                    {
-                        PLAYER_CUL = human;
-                        break;
-                    }
-                    else if (hod == "sn")
-                    {
-                        PLAYER_CUL = snake;
-                        break;
-                    }
-                    else if (hod == "sc")
-                    {
-                        PLAYER_CUL = scissors;
-                        break;
-                    }
-                    else if (hod == "f")
-                    {
-                        PLAYER_CUL = fire;
+                        PLAYER_CUL = 2;
                         break;
                     }
                     else
@@ -137,31 +58,29 @@ namespace CAM_NOG_BUM
                         Console.WriteLine();
                     }
                 }
-                #endregion
-                #region hto pobedil
+
                 if (PLAYER_CUL == bot_cul)
                 {
                     //drow
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    round++;
-                    Console.WriteLine($"Раунд {round} был закончн ничьёй, бота и игрока совпали выборы");
+                    raund++;
+                    Console.WriteLine($"Раунд{raund} бил закончн ничєй");
 
                 }
-                else if (PLAYER_CUL>=bot_cul-7|| PLAYER_CUL >= bot_cul -7+15)
+                else if ((bot_cul == 0 && PLAYER_CUL == 1) || (bot_cul == 1 && PLAYER_CUL == 2) || (bot_cul == 2 && PLAYER_CUL == 0))
                 {
                     //bot win round
-                    round++;
+                    raund++;
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Раунд {round} был закончн победой бота, бот ходил {variant[bot_cul]}, а игрок {variant[PLAYER_CUL]}");
-
+                    Console.WriteLine($"Раунд{raund} бил закончн победой бота");
                     win_bot++;
                 }
-                else if (bot_cul >= PLAYER_CUL - 7 || bot_cul >= PLAYER_CUL - 7 + 15)
+                else if ((bot_cul == 1 && PLAYER_CUL == 0) || (bot_cul == 2 && PLAYER_CUL == 1) || (bot_cul == 0 && PLAYER_CUL == 2))
                 {
                     //player win round
-                    round++;
+                    raund++;
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Раунд{round} был закончн победой игрока, бот ходил {variant[bot_cul]}, а игрок {variant[PLAYER_CUL]}");
+                    Console.WriteLine($"Раунд{raund} бил закончн победой игрока");
                     win_Player++;
                 }
                 else
@@ -169,25 +88,21 @@ namespace CAM_NOG_BUM
                     //если ошибка
                     Console.WriteLine("erorr");
                 }
-                #endregion
-                #region esli pobeda
                 if (win_Player + 3 == win_bot)
                 {
                     //победа бота
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с щотом {win_bot}/{win_Player} в пользу бота");
+                    Console.WriteLine($"Игрра била закончена на раунде под номером {raund} с щотом {win_bot}/{win_Player} в пользу бота");
                     break;
                 }
                 else if (win_Player - 3 == win_bot)
                 {
                     //победа игрока
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с щотом {win_bot}/{win_Player} в пользу игрока");
+                    Console.WriteLine($"Игрра била закончена на раунде под номером {raund} с щотом {win_bot}/{win_Player} в пользу игрока");
                     break;
                 }
-                #endregion
             }
-            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
