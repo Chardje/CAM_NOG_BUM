@@ -4,21 +4,7 @@ namespace CAM_NOG_BUM
 {
     class Program
     {
-        const byte rock = 0;
-        const byte gun = 1;
-        const byte lighting = 2;
-        const byte devil = 3;
-        const byte dragon = 4;
-        const byte water = 5;
-        const byte air = 6;
-        const byte paper = 7;
-        const byte sponge = 8;
-        const byte wolf = 9;
-        const byte tree = 10;
-        const byte human = 11;
-        const byte snake = 12;
-        const byte scissors = 13;
-        const byte fire = 14;
+        
         static void Main(string[] args)
         {
             /*\
@@ -49,92 +35,25 @@ namespace CAM_NOG_BUM
                 while (true)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("Вибери свой обєкт: r(rock), g(gun), l(lighting), de(devil), dr(dragon), wa(water), a(air), p(paper), sp(sponge), wo(wolf), t(tree), h(human), sn(snake), sc(scissors),f(fire) : ");
+                    Console.Write("Вибери свой обєкт: ");
+                    for( byte i=0;i<variant.Length;i++)
+                    {
+                        Console.Write($"{variant[i]}, ");    
+                    }
+                    Console.Write("\b\b :");
                     //камнем забити
                     //ножницами зарізати
                     //задушити бумагою
                     hod = Console.ReadLine();
                     Console.WriteLine();
                     //конвертуемо в число
-                    if (hod == "r")
+                    for (byte i = 0; i < variant.Length; i++)
                     {
-                        PLAYER_CUL = rock;
-                        break;
-                    }
-                    else if (hod == "g")
-                    {
-                        PLAYER_CUL = gun;
-                        break;
-                    }
-                    else if (hod == "l")
-                    {
-                        PLAYER_CUL = lighting;
-                        break;
-                    }
-                    else if (hod == "de")
-                    {
-                        PLAYER_CUL = devil;
-                        break;
-                    }
-                    else if (hod == "dr")
-                    {
-                        PLAYER_CUL = dragon;
-                        break;
-                    }
-                    else if (hod == "wa")
-                    {
-                        PLAYER_CUL = water;
-                        break;
-                    }
-                    else if (hod == "a")
-                    {
-                        PLAYER_CUL = air;
-                        break;
-                    }
-                    else if (hod == "p")
-                    {
-                        PLAYER_CUL = paper;
-                        break;
-                    }
-                    else if (hod == "sp")
-                    {
-                        PLAYER_CUL = sponge;
-                        break;
-                    }
-                    else if (hod == "wo")
-                    {
-                        PLAYER_CUL = wolf;
-                        break;
-                    }
-                    else if (hod == "t")
-                    {
-                        PLAYER_CUL = tree;
-                        break;
-                    }
-                    else if (hod == "h")
-                    {
-                        PLAYER_CUL = human;
-                        break;
-                    }
-                    else if (hod == "sn")
-                    {
-                        PLAYER_CUL = snake;
-                        break;
-                    }
-                    else if (hod == "sc")
-                    {
-                        PLAYER_CUL = scissors;
-                        break;
-                    }
-                    else if (hod == "f")
-                    {
-                        PLAYER_CUL = fire;
-                        break;
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine();
+                        if (variant[i]==hod)
+                        {
+                            PLAYER_CUL = i;
+                            break;
+                        }
                     }
                 }
                 #endregion
