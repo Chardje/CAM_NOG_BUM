@@ -20,7 +20,7 @@ namespace CAM_NOG_BUM
             Random R = new Random();
             byte bot_cul;
             string[] variant = { "rock", "gun", "lighting", "devil", "dragon", "water", "air", "paper", "sponge", "wolf", "tree", "human", "lighting", "snake", "scissors", "fire" };
-            byte PLAYER_CUL;
+            byte PLAYER_CUL=100;
             byte round = 0;
             byte win_bot = 0;
             byte win_Player = 0;
@@ -29,11 +29,13 @@ namespace CAM_NOG_BUM
 
             while (true)
             {
-                #region zapis xoda
                 bot_cul = (byte)R.Next(0, 15);
+                #region zapis xoda
+
                 //0 kum 1 nog 2 bum 3 spock 4 lizard
-                while (true)
+                while (PLAYER_CUL<100)
                 {
+                    PLAYER_CUL = 100;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Вибери свой обєкт: ");
                     for( byte i=0;i<variant.Length;i++)
@@ -55,6 +57,7 @@ namespace CAM_NOG_BUM
                             break;
                         }
                     }
+
                 }
                 #endregion
                 #region hto pobedil
@@ -94,14 +97,14 @@ namespace CAM_NOG_BUM
                 {
                     //победа бота
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с щотом {win_bot}/{win_Player} в пользу бота");
+                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с счетом {win_bot}/{win_Player} в пользу бота");
                     break;
                 }
                 else if (win_Player - 3 == win_bot)
                 {
                     //победа игрока
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с щотом {win_bot}/{win_Player} в пользу игрока");
+                    Console.WriteLine($"Игрра била закончена на раунде под номером {round} с счетом {win_bot}/{win_Player} в пользу игрока");
                     break;
                 }
                 #endregion
